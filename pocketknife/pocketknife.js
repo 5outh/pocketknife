@@ -116,6 +116,34 @@ var strictWriteFile = function(path, contents){
   fs.writeFileSync(locs.join("/"), contents);
 }
 
+var zipWith = function(as, bs, f){
+  return _(_.zip(as, bs)).map(function(xs){
+    return f(xs[0], xs[1]);
+  });
+};
+
+var id = function(x){ return x; };
+var constant = function(x) { return x; };
+var sum = function(xs){
+  return _.foldl(xs, function(x, y){ return x + y; }, 0);
+};
+var product = function(xs){ 
+  return _.foldl(xs, function(x, y){ return x * y; }, 1);
+};
+var concatAll = function(xs){
+  if(xs.length == 0){
+    return;
+  }else if(typeof xs[0] === 'string'){
+    acc = "";
+  }else{
+    acc = [];
+  }
+  return _.foldl(xs, function(x, y){ return x.concat(y);}, acc);
+};
+var concatMap = function(xs, f){
+  return concatAll(_(xs).map(f));
+};
+
 var namespace = {
   passResponseFromSource : passResponseFromSource,
   sortByKeys : sortByKeys,
@@ -128,6 +156,13 @@ var namespace = {
   maybe : maybe,
   splitPath : splitPath,
   strictWriteFile : strictWriteFile,
+  zipWith : zipWith,
+  id : id,
+  constant : constant,
+  sum : sum,
+  product : product,
+  concatAll : concatAll,
+  concatMap : concatMap,
   _ : _
 };
 

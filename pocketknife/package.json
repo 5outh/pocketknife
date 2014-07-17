@@ -1,6 +1,6 @@
 {
   "name": "pocketknife",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "a small set of abstractions",
   "main": "pocketknife.js",
   "scripts": {
