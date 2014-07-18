@@ -122,6 +122,17 @@ var zipWith = function(as, bs, f){
   });
 };
 
+var compactObject = function(obj){
+  var newObj = {};
+  _.each(_.pairs(obj), function(pair){
+    if( !_.any(pair, badValue ) ) {
+      newObj[pair[0]] = pair[1];
+    }
+  });
+  return newObj;
+}
+
+
 var id = function(x){ return x; };
 var constant = function(x) { return x; };
 var sum = function(xs){
@@ -151,6 +162,7 @@ var namespace = {
   replicate : replicate,
   accessSafe : accessSafe,
   badValue : badValue,
+  compactObject : compactObject,
   recCompact : recCompact,
   remapKeys : remapKeys,
   maybe : maybe,
